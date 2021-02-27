@@ -1,9 +1,6 @@
-# New Project
+# Instagram clone
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
-> React, Typescript + Tailwind
-
-## Available Scripts
+> React, Typescript + Tailwind + Firebase
 
 ### npm start
 

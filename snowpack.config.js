@@ -9,22 +9,19 @@ module.exports = {
     '@snowpack/plugin-dotenv',
     '@snowpack/plugin-typescript',
     '@snowpack/plugin-postcss',
+    '@snowpack/plugin-webpack',
   ],
-  routes: [
-    /* Enable an SPA Fallback in development: */
-    // {"match": "routes", "src": ".*", "dest": "/index.html"},
-  ],
-  optimize: {
-    /* Example: Bundle your final build: */
-    // "bundle": true,
+  alias: {
+    '@app': './src',
   },
   packageOptions: {
-    /* ... */
+    types: true,
   },
   devOptions: {
-    /* ... */
+    port: 8080,
   },
   buildOptions: {
-    /* ... */
+    out: 'dist',
+    sourcemap: true,
   },
 };
