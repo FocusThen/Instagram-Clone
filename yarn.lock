@@ -1367,6 +1367,13 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/firebase@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@types/firebase/-/firebase-3.2.1.tgz#17c1c8fee7485ab09668d2461e34540bdf44b3b1"
+  integrity sha512-G8XgHMu2jHlElfc2xVNaYP50F0qrqeTCjgeG1v5b4SRwWG4XKC4fCuEdVZuZaMRmVygcnbRZBAo9O7RsDvmkGQ==
+  dependencies:
+    firebase "*"
+
 "@types/http-assert@*":
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/@types/http-assert/-/http-assert-1.5.1.tgz#d775e93630c2469c2f980fc27e3143240335db3b"
@@ -4020,7 +4027,7 @@ find-up@^4.0.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
-firebase@^8.2.9:
+firebase@*, firebase@^8.2.9:
   version "8.2.9"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-8.2.9.tgz#d5a1e2a13776862f05237e717f13320a377bc9c9"
   integrity sha512-0QNPgKre9OHuBHwXKIs1wW1aPrO0wx1si3JMA46vPOmx/vkpQQD2OCxdZdVUc+y5u9d/yNMvVBR6j85H0O15rA==
