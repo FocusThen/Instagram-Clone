@@ -1,18 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '@app/App';
-import '@app/index.css';
-import { firebase } from '@app/lib/firabase';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from '@app/App'
+import '@app/index.css'
+import { firebase } from '@app/lib/firabase'
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root'),
-);
+  document.getElementById('root')
+)
 
 // Hot Module Replacement (HMR) - Remove this snippet to remove HMR.
 // Learn more: https://snowpack.dev/concepts/hot-module-replacement
 if (import.meta.hot) {
-  import.meta.hot.accept();
+  import.meta.hot.accept()
 }

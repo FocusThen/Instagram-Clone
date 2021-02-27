@@ -1,4 +1,4 @@
-import Firebase from 'firebase';
+import Firebase from 'firebase'
 
 const {
   SNOWPACK_PUBLIC_apiKey,
@@ -7,7 +7,7 @@ const {
   SNOWPACK_PUBLIC_storageBucket,
   SNOWPACK_PUBLIC_messagingSenderId,
   SNOWPACK_PUBLIC_appId,
-} = import.meta.env;
+} = import.meta.env
 
 const config = {
   apiKey: SNOWPACK_PUBLIC_apiKey,
@@ -16,6 +16,6 @@ const config = {
   storageBucket: SNOWPACK_PUBLIC_storageBucket,
   messagingSenderId: SNOWPACK_PUBLIC_messagingSenderId,
   appId: SNOWPACK_PUBLIC_appId,
-};
+}
 
-export const firebase = Firebase.initializeApp(config);
+export const firebase = Firebase.initializeApp(config)
