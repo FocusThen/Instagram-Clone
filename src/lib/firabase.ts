@@ -7,6 +7,7 @@ const {
   SNOWPACK_PUBLIC_storageBucket,
   SNOWPACK_PUBLIC_messagingSenderId,
   SNOWPACK_PUBLIC_appId,
+  SNOWPACK_PUBLIC_databaseURL,
 } = import.meta.env
 
 const config = {
@@ -16,6 +17,7 @@ const config = {
   storageBucket: SNOWPACK_PUBLIC_storageBucket,
   messagingSenderId: SNOWPACK_PUBLIC_messagingSenderId,
   appId: SNOWPACK_PUBLIC_appId,
+  databaseURL: SNOWPACK_PUBLIC_databaseURL,
 }
 
 const firebase = Firebase.initializeApp(config)
