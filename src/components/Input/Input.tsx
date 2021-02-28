@@ -13,7 +13,7 @@ export default React.forwardRef<HTMLInputElement, InputProps>(function Input(
 ): JSX.Element {
   const inputClasses = classNames(
     'text-sm w-full mr-3 py-5 px-4 h-2 border rounded mb-2 focus:outline-none focus:ring-1 focus:ring-blue-500',
-    { 'border-red-500': error },
+    { 'border-red-500 focus:ring-red-500': error },
     className
   )
   return (
