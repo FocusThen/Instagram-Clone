@@ -8,19 +8,19 @@ const SignUp = lazy(() => import('@app/pages/SignUp'))
 const Profile = lazy(() => import('@app/pages/Profile'))
 const NotFound = lazy(() => import('@app/pages/NotFound'))
 
-interface AppProps {}
-
-function App({}: AppProps) {
+function App() {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <Switch>
-        <Route path={ROUTES.LOGIN} component={Login} />
-        <Route path={ROUTES.SIGN_UP} component={SignUp} />
-        <Route path={ROUTES.PROFILE} component={Profile} />
-        <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
-        <Route path={ROUTES.NOT_FOUND} component={NotFound} />
-      </Switch>
-    </Suspense>
+    <Router>
+      <Suspense fallback={<p>Loading...</p>}>
+        <Switch>
+          <Route path={ROUTES.LOGIN} component={Login} />
+          <Route path={ROUTES.SIGN_UP} component={SignUp} />
+          <Route path={ROUTES.PROFILE} component={Profile} />
+          <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
+          <Route path={ROUTES.NOT_FOUND} component={NotFound} />
+        </Switch>
+      </Suspense>
+    </Router>
   )
 }
 

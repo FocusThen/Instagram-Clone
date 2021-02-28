@@ -1,7 +1,7 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
-    public: { url: '/', static: true },
+    public: { url: '/' },
     src: { url: '/dist' },
   },
   plugins: [
@@ -14,6 +14,7 @@ module.exports = {
   alias: {
     '@app': './src',
   },
+  routes: [{ match: 'routes', src: '.*', dest: '/index.html' }],
   packageOptions: {
     types: true,
   },
@@ -24,4 +25,4 @@ module.exports = {
     out: 'dist',
     sourcemap: true,
   },
-};
+}
