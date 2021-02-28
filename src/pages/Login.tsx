@@ -1,18 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as ROUTES from '@app/constants/routes'
 import { useForm } from 'react-hook-form'
 import hookforResolvers from '@hookform/resolvers/yup'
 import { LoginSchema } from '@app/validations/LoginSchema'
 
+import { FirebaseContext } from '@app/context/firebase'
 import Input from '@app/components/Input/Input'
 import Button from '@app/components/Button/Button'
 
 export default function Login() {
+  const { firebase } = useContext(FirebaseContext)
+
   // snowpack issue
   // https://github.com/react-hook-form/resolvers/issues/71#issuecomment-770382064
   const yupResolver = hookforResolvers.yupResolver
-  const { register, handleSubmit, errors, formState } = useForm({
+  const { register, handleSubmit, errors, formState, setError } = useForm({
     resolver: yupResolver(LoginSchema),
   })
   const { isDirty } = formState
@@ -21,8 +24,29 @@ export default function Login() {
     document.title = 'Login - Instagram Clone'
   }, [])
 
-  const onSubmit = (values: { username: string; password: string }) => {
-    console.log(values)
+  const [errorMessage, setErrorMessage] = useState<string>()
+  const onSubmit = async (values: { email: string; password: string }) => {
+    try {
+      await firebase
+        .auth()
+        .signInWithEmailAndPassword(values.email, values.password)
+    } catch (error) {
+      if (error.code.match(/email/gi)) {
+        setError('email', {
+          type: 'manuel',
+          message: error.message,
+          shouldFocus: true,
+        })
+      }
+      if (error.code.match(/password/gi)) {
+        setError('password', {
+          type: 'manuel',
+          message: error.message,
+          shouldFocus: true,
+        })
+      }
+      setErrorMessage(error.message)
+    }
   }
 
   return (
@@ -45,6 +69,10 @@ export default function Login() {
                 className="mt-2 mb-4 w-6/12"
               />
             </h1>
+
+            {errorMessage && (
+              <p className="mb-4 text-xs text-red-500">{errorMessage}</p>
+            )}
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <Input
