@@ -105,7 +105,7 @@ export default function Login() {
                 errorMessage={errors.password?.message}
               />
 
-              <Button disabled={!isDirty} type="submit">
+              <Button disabled={!isDirty} type="submit" className="w-full">
                 Log In
               </Button>
             </form>

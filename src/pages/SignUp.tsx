@@ -160,7 +160,7 @@ export default function SignUp() {
                 errorMessage={errors.password?.message}
               />
 
-              <Button disabled={!isDirty} type="submit">
+              <Button disabled={!isDirty} type="submit" className="w-full">
                 Sign Up
               </Button>
             </form>
