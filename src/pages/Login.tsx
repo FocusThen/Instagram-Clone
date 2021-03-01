@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import * as ROUTES from '@app/constants/routes'
 import { useForm } from 'react-hook-form'
 import hookforResolvers from '@hookform/resolvers/yup'
@@ -9,13 +9,23 @@ import { FirebaseContext } from '@app/context/firebase'
 import Input from '@app/components/Input/Input'
 import Button from '@app/components/Button/Button'
 
+import type { LoginFormTypes } from '@appTypes/FormEntitys'
+
 export default function Login() {
+  const history = useHistory()
+
   const { firebase } = useContext(FirebaseContext)
 
   // snowpack issue
   // https://github.com/react-hook-form/resolvers/issues/71#issuecomment-770382064
   const yupResolver = hookforResolvers.yupResolver
-  const { register, handleSubmit, errors, formState, setError } = useForm({
+  const {
+    register,
+    handleSubmit,
+    errors,
+    formState,
+    setError,
+  } = useForm<LoginFormTypes>({
     resolver: yupResolver(LoginSchema),
   })
   const { isDirty } = formState
@@ -25,11 +35,12 @@ export default function Login() {
   }, [])
 
   const [errorMessage, setErrorMessage] = useState<string>()
-  const onSubmit = async (values: { email: string; password: string }) => {
+  const onSubmit = async (values: LoginFormTypes) => {
     try {
       await firebase
         .auth()
         .signInWithEmailAndPassword(values.email, values.password)
+      history.push(ROUTES.DASHBOARD)
     } catch (error) {
       if (error.code.match(/email/gi)) {
         setError('email', {
@@ -60,7 +71,7 @@ export default function Login() {
             width="500"
           />
         </div>
-        <div className="flex flex-col w-2/5 space-y-4">
+        <div className="flex flex-col w-2/5 space-y-2">
           <div className="flex flex-col items-center bg-white p-4 border mb-4">
             <h1 className="flex justify-center w-full">
               <img

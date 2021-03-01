@@ -13,6 +13,7 @@ module.exports = {
   ],
   alias: {
     '@app': './src',
+    '@appTypes': './types',
   },
   routes: [{ match: 'routes', src: '.*', dest: '/index.html' }],
   packageOptions: {
