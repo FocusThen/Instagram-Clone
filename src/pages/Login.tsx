@@ -30,10 +30,6 @@ export default function Login() {
   })
   const { isDirty } = formState
 
-  useEffect(() => {
-    document.title = 'Login - Instagram Clone'
-  }, [])
-
   const [errorMessage, setErrorMessage] = useState<string>()
   const onSubmit = async (values: LoginFormTypes) => {
     try {
@@ -59,6 +55,10 @@ export default function Login() {
       setErrorMessage(error.message)
     }
   }
+
+  useEffect(() => {
+    document.title = 'Login - Instagram Clone'
+  }, [])
 
   return (
     <div className="bg-gray-50">

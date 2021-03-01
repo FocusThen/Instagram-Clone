@@ -15,7 +15,7 @@ const Button: FC<ButtonProps> = ({
 }) => {
   const buttonClasses = classNames(
     'bg-blue-500 text-white w-full rounded h-8 font-bold',
-    { 'disabled:opacity-50': disabled },
+    { 'cursor-not-allowed disabled:opacity-50': disabled },
     className
   )
   return (
