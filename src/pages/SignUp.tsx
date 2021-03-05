@@ -106,7 +106,7 @@ export default function SignUp() {
           <div className="flex flex-col items-center bg-white p-4 border mb-4">
             <h1 className="flex justify-center w-full">
               <img
-                src="/images/logo.png"
+                src="/assets/images/logo.png"
                 alt="Instagram"
                 className="mt-2 mb-4 w-6/12"
               />

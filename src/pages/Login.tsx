@@ -65,7 +65,7 @@ export default function Login() {
       <section className="container flex mx-auto max-w-screen-md items-center h-screen">
         <div className="flex w-3/5">
           <img
-            src="/images/iphone-with-profile.jpg"
+            src="/assets/images/iphone-with-profile.jpg"
             alt="Phone"
             height="500"
             width="500"
@@ -75,7 +75,7 @@ export default function Login() {
           <div className="flex flex-col items-center bg-white p-4 border mb-4">
             <h1 className="flex justify-center w-full">
               <img
-                src="/images/logo.png"
+                src="/assets/images/logo.png"
                 alt="Instagram"
                 className="mt-2 mb-4 w-6/12"
               />
