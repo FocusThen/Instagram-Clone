@@ -9,10 +9,6 @@ import Button from '@app/components/Button/Button'
 export default function TheHeader() {
   const { firebase } = useContext(FirebaseContext)
   const { user } = useContext(UserContext)
-  console.log(user)
-  // const user = {
-  //   displayName: 'raphael',
-  // }
 
   const signOut = () => {
     firebase.auth().signOut()
