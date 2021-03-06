@@ -8,15 +8,13 @@ export const useUser = () => {
   const { user } = useContext(UserContext)
 
   useEffect(() => {
-    if (user && user.uid) {
-      getUserObjByUserId()
-    }
     async function getUserObjByUserId() {
       if (user && user.uid) {
         const [response] = await getUserByUserId(user.uid)
         setActiveUser({ ...response })
       }
     }
+    getUserObjByUserId()
   }, [user])
 
   return { user: activeUser }
