@@ -1,13 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '@app/context/user'
 import { getUserByUserId, getUserFollowPhotos } from '@app/services/firebase'
-import type { PhotosEntity } from '@appTypes/PhotosEntity'
-
-interface UserFollowPhotosEntity extends PhotosEntity {
-  userLikedPhoto: boolean
-  docId: string
-  username: string
-}
+import type { UserFollowPhotosEntity } from '@appTypes/UserFollowPhotosEntity'
 
 export const useFollowedUsersPhotos = () => {
   const { user: { uid: userId = '' } = {} } = useContext(UserContext)
