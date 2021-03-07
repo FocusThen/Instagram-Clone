@@ -51,7 +51,7 @@ export function seedDatabase(firebase) {
       .add({
         photoId: i,
         userId: '2',
-        imageSrc: `/images/users/raphael/${i}.jpg`,
+        imageSrc: `/assets/images/users/raphael/${i}.jpg`,
         caption: 'Saint George and the Dragon',
         likes: [],
         comments: [
