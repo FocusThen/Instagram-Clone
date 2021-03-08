@@ -12,7 +12,7 @@ export default React.forwardRef<HTMLInputElement, InputProps>(function Input(
   ref
 ): JSX.Element {
   const inputClasses = classNames(
-    'text-sm w-full mr-3 py-5 px-4 h-2 border rounded mb-2 bg-gray-50 focus:outline-none focus:ring-1 focus:ring-gray-400',
+    'text-sm w-full h-2 py-5 px-4 border rounded bg-gray-50 focus:outline-none focus:ring-1 focus:ring-gray-400',
     { 'border-red-500 focus:ring-red-500': error },
     className
   )

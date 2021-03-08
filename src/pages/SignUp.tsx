@@ -119,6 +119,7 @@ export default function SignUp() {
             <form onSubmit={handleSubmit(onSubmit)}>
               <Input
                 ref={register}
+                className="mr-3 mb-2"
                 onKeyUp={(e) =>
                   (e.currentTarget.value = e.currentTarget.value.replace(
                     /\s/g,
@@ -134,6 +135,7 @@ export default function SignUp() {
               />
               <Input
                 ref={register}
+                className="mr-3 mb-2"
                 name="fullName"
                 aria-label="Enter your Full name"
                 type="text"
@@ -143,6 +145,7 @@ export default function SignUp() {
               />
               <Input
                 ref={register}
+                className="mr-3 mb-2"
                 name="email"
                 aria-label="Enter your email address"
                 type="text"
@@ -152,6 +155,7 @@ export default function SignUp() {
               />
               <Input
                 ref={register}
+                className="mr-3 mb-2"
                 name="password"
                 aria-label="Enter your password"
                 type="password"

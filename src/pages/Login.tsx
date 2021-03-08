@@ -88,6 +88,7 @@ export default function Login() {
             <form onSubmit={handleSubmit(onSubmit)}>
               <Input
                 ref={register}
+                className="mr-3 mb-2"
                 name="email"
                 aria-label="Enter your email address"
                 type="text"
@@ -97,6 +98,7 @@ export default function Login() {
               />
               <Input
                 ref={register}
+                className="mr-3 mb-2"
                 name="password"
                 aria-label="Enter your password"
                 type="password"
