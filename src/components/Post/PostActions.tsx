@@ -4,8 +4,11 @@ import { UserContext } from '@app/context/user'
 import classNames from 'classnames'
 
 export type PostActionsProps = {
+  docId: string
+  totalLikes: number
+  likedPhoto: boolean
   handleFocus: () => void
-} & any
+}
 
 export default function PostActions({
   docId,
