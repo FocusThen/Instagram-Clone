@@ -5,6 +5,7 @@ import { FirebaseContext } from '@app/context/firebase'
 import { UserContext } from '@app/context/user'
 import * as ROUTES from '@app/constants/routes'
 import Button from '@app/components/Button/Button'
+import ProfilePicture from '@app/components/ProfilePicture/ProfilePicture'
 
 export default function TheHeader() {
   const { firebase } = useContext(FirebaseContext)
@@ -74,13 +75,11 @@ export default function TheHeader() {
                   </svg>
                 </button>
                 <div className="flex items-center cursor-pointer">
-                  <Link to={`/p/${user.displayName}`}>
-                    <img
-                      className="rounded-full h-8 w-8 flex"
-                      src={`/assets/images/avatars/${user.displayName}.jpg`}
-                      alt={`${user.displayName} Profile Picture`}
-                    />
-                  </Link>
+                  <ProfilePicture
+                    username={user.displayName}
+                    className="h-8 w-8"
+                    alt={`${user.displayName} Profile Picture`}
+                  />
                 </div>
               </>
             ) : (

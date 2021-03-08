@@ -1,6 +1,7 @@
 import React, { FC, memo } from 'react'
 import { Link } from 'react-router-dom'
 import Skelton from 'react-loading-skeleton'
+import ProfilePicture from '@app/components/ProfilePicture/ProfilePicture'
 
 export type SidebarUserProps = {
   username?: string
@@ -16,9 +17,9 @@ const SidebarUser: FC<SidebarUserProps> = ({ username, fullName }) => {
       className="grid grid-cols-4 gap-4 mb-4 items-center"
     >
       <div className="flex items-center justify-between col-span-1">
-        <img
-          className="rounded-full w-16 flex mr-3"
-          src={`/assets/images/avatars/${username}.jpg`}
+        <ProfilePicture
+          username={username}
+          className="w-16 mr-3"
           alt="My Profile"
         />
       </div>
