@@ -11,7 +11,7 @@ export type PostCommentsProps = {
     displayName: string | null
   }[]
   posted: number
-  commentInput: React.RefObject<HTMLDivElement>
+  commentInput: React.MutableRefObject<HTMLInputElement | null>
 }
 
 export default function PostComments({

@@ -13,7 +13,9 @@ export default function Post({
 }: {
   content: UserFollowPhotosEntity
 }): JSX.Element {
-  const commentInput = useRef<HTMLDivElement>(null)
+  const commentInput: React.MutableRefObject<HTMLInputElement | null> = useRef(
+    null
+  )
 
   const handleFocus = () => commentInput.current && commentInput.current.focus()
 
