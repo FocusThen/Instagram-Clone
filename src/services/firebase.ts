@@ -64,3 +64,5 @@ export async function getUserFollowPhotos(
 
   return photosWithUserDetail
 }
+
+export const getSuggestedProfiles = (userId: string) => {}
