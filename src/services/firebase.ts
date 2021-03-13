@@ -1,4 +1,4 @@
-import { firebase } from '@app/lib/firabase'
+import { FieldValue, firebase } from '@app/lib/firabase'
 import type { UserEntity } from '@appTypes/UserEntity'
 import type { PhotosEntity } from '@appTypes/PhotosEntity'
 
@@ -84,9 +84,32 @@ export const getSuggestedProfiles = async (userId: string) => {
 
 export const updateUserFollowing = async (
   docId: string,
-  profileId: string
-) => {}
+  profileId: string,
+  isFollowingProfile: boolean
+) => {
+  return firebase
+    .firestore()
+    .collection('users')
+    .doc(docId)
+    .update({
+      following: isFollowingProfile
+        ? FieldValue.arrayRemove(profileId)
+        : FieldValue.arrayUnion(profileId),
+    })
+}
+
 export const updateFollowedUserFollowers = async (
-  userDocId: string,
-  userId: string
-) => {}
+  docId: string,
+  followingUserId: string,
+  isFollowingProfile: boolean
+) => {
+  return firebase
+    .firestore()
+    .collection('users')
+    .doc(docId)
+    .update({
+      following: isFollowingProfile
+        ? FieldValue.arrayRemove(followingUserId)
+        : FieldValue.arrayUnion(followingUserId),
+    })
+}

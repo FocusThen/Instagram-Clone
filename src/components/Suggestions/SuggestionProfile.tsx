@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import ProfilePicture from '../ProfilePicture/ProfilePicture'
+
+import {
+  getUserByUserId,
+  updateUserFollowing,
+  updateFollowedUserFollowers,
+} from '@app/services/firebase'
+import ProfilePicture from '@app/components/ProfilePicture/ProfilePicture'
 
 export type SuggestionProfileProps = {
   userDocId: string
@@ -19,6 +25,10 @@ export default function SuggestionProfile({
 
   async function handleFollowUser() {
     setFollowed(true)
+
+    const [{ docId }] = await getUserByUserId(userId)
+    await updateUserFollowing(docId, profileId, followed)
+    await updateFollowedUserFollowers(userDocId, userId, followed)
   }
 
   return !followed ? (
