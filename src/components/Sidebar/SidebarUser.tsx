@@ -12,10 +12,7 @@ const SidebarUser: FC<SidebarUserProps> = ({ username, fullName }) => {
   return !username || !fullName ? (
     <Skelton count={1} height={61} />
   ) : (
-    <Link
-      to={`/p/${username}`}
-      className="grid grid-cols-4 gap-4 mb-4 items-center"
-    >
+    <div className="grid grid-cols-4 gap-4 mb-4 items-center">
       <div className="flex items-center justify-between col-span-1">
         <ProfilePicture
           username={username}
@@ -24,10 +21,12 @@ const SidebarUser: FC<SidebarUserProps> = ({ username, fullName }) => {
         />
       </div>
       <div className="col-span-3">
-        <p className="font-bold text-sm">{username}</p>
-        <p className="text-sm">{fullName}</p>
+        <Link to={`/p/${username}`}>
+          <p className="font-bold text-sm">{username}</p>
+          <p className="text-sm">{fullName}</p>
+        </Link>
       </div>
-    </Link>
+    </div>
   )
 }
 export default memo(SidebarUser)
