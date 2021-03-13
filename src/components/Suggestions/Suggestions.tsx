@@ -11,42 +11,47 @@ export type SuggestionsProps = {
 }
 
 const Suggestions: FC<SuggestionsProps> = ({ userId }) => {
-  const [profiles, setProfiles] = useState<UserEntity[]>([
-    {
-      docId: '1',
-      username: 'Dali',
-      userId: '3',
-      dateCreated: 1,
-      followers: [],
-      following: [],
-      fullName: '',
-    },
-  ])
+  const [profiles, setProfiles] = useState<UserEntity[]>()
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    async function suggestedProfiles() {
+    function suggestedProfiles() {
       if (userId) {
-        // const response = await getSuggestedProfiles(userId)
-        // setProfiles(response)
+        setLoading(true)
+        getSuggestedProfiles(userId)
+          .then((response) => {
+            setLoading(false)
+            setProfiles(response)
+          })
+          .catch(() => {
+            setLoading(false)
+          })
       }
     }
-    // suggestedProfiles()
+    suggestedProfiles()
   }, [userId])
 
-  return !profiles ? (
+  return loading ? (
     <Skeleton count={1} height={150} className="mt-5" />
-  ) : profiles.length > 0 ? (
-    <div className="grid">
-      {profiles.map((profile) => (
-        <SuggestionProfile
-          key={profile.docId}
-          userDocId={profile.docId}
-          username={profile.username}
-          profileId={profile.userId}
-          userId={userId}
-        />
-      ))}
-    </div>
+  ) : profiles ? (
+    profiles.length > 0 ? (
+      <div className="flex flex-col">
+        <div className="flex items-center align-middle justify-between mb-2 mt-2">
+          <p className="font-bold text-gray-900 text-sm">Suggestions for you</p>
+        </div>
+        <div className="grid gap-5 mt-4">
+          {profiles.map((profile) => (
+            <SuggestionProfile
+              key={profile.docId}
+              userDocId={profile.docId}
+              username={profile.username}
+              profileId={profile.userId}
+              userId={userId}
+            />
+          ))}
+        </div>
+      </div>
+    ) : null
   ) : null
 }
 

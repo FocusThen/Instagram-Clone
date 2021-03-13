@@ -65,4 +65,28 @@ export async function getUserFollowPhotos(
   return photosWithUserDetail
 }
 
-export const getSuggestedProfiles = (userId: string) => {}
+export const getSuggestedProfiles = async (userId: string) => {
+  const result = await firebase.firestore().collection('users').limit(10).get()
+
+  const [{ following }] = await getUserByUserId(userId)
+
+  return result.docs
+    .map((user) => {
+      const docId = user.id
+      const users = user.data()
+      return { ...users, docId } as UserEntity
+    })
+    .filter(
+      (profile) =>
+        profile.userId !== userId && !following.includes(profile.userId)
+    )
+}
+
+export const updateUserFollowing = async (
+  docId: string,
+  profileId: string
+) => {}
+export const updateFollowedUserFollowers = async (
+  userDocId: string,
+  userId: string
+) => {}
