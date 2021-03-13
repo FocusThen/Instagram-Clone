@@ -1,7 +1,7 @@
 import React from 'react'
 import { useUser } from '@app/hooks/useUser'
 import SidebarUser from '@app/components/Sidebar/SidebarUser'
-import SidebarSuggestions from '@app/components/Sidebar/SidebarSuggestions'
+import SidebarSuggestions from '@app/components/Suggestions/Suggestions'
 
 export default function Sidebar() {
   const {
