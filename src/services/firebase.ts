@@ -117,7 +117,7 @@ export const updateFollowedUserFollowers = async (
 }
 export const getUserByUsername = async (
   username: string
-): Promise<boolean | UserEntity[]> => {
+): Promise<UserEntity[]> => {
   const result = await firebase
     .firestore()
     .collection('users')
@@ -133,5 +133,26 @@ export const getUserByUsername = async (
     } as UserEntity
   })
 
-  return user.length > 0 ? user : false
+  return user
+}
+
+export async function getUserPhotosByUsername(username: string) {
+  const [user] = await getUserByUsername(username)
+
+  const result = await firebase
+    .firestore()
+    .collection('photos')
+    .where('userId', '==', user.userId)
+    .get()
+
+  const photos = result.docs.map((item) => {
+    const docId = item.id
+    const photos = item.data()
+    return {
+      ...photos,
+      docId,
+    } as PhotosEntity
+  })
+
+  return photos
 }

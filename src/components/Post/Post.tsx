@@ -10,8 +10,13 @@ import type { UserFollowPhotosEntity } from '@appTypes/UserFollowPhotosEntity'
 
 export default function Post({
   content,
+  isHeaderVisible = true,
 }: {
   content: UserFollowPhotosEntity
+  /**
+   * @default true
+   */
+  isHeaderVisible?: boolean
 }): JSX.Element {
   const commentInput: React.MutableRefObject<HTMLInputElement | null> = useRef(
     null
@@ -21,8 +26,13 @@ export default function Post({
 
   return (
     <div className="rounded col-span-4 border bg-white mb-16">
-      <PostHeader username={content.username} />
-      <PostImage src={content.imageSrc} caption={content.caption} />
+      {isHeaderVisible && <PostHeader username={content.username} />}
+      <PostImage
+        totalLikes={content.likes.length}
+        totalComments={content.comments.length}
+        src={content.imageSrc}
+        caption={content.caption}
+      />
       <PostActions
         docId={content.docId}
         totalLikes={content.likes.length}
