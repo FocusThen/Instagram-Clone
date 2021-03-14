@@ -113,3 +113,6 @@ export const updateFollowedUserFollowers = async (
         : FieldValue.arrayUnion(followingUserId),
     })
 }
+export const getUserByUsername = async (username: string): Promise<boolean> => {
+  return false
+}
