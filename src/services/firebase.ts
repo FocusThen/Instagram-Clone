@@ -2,7 +2,7 @@ import { FieldValue, firebase } from '@app/lib/firabase'
 import type { UserEntity } from '@appTypes/UserEntity'
 import type { PhotosEntity } from '@appTypes/PhotosEntity'
 
-export async function doesUsernameExist(username: string) {
+export async function doesUsernameExist(username: string): Promise<boolean[]> {
   const result = await firebase
     .firestore()
     .collection('users')
@@ -12,7 +12,7 @@ export async function doesUsernameExist(username: string) {
   return result.docs.map((user) => user.data().length > 0)
 }
 
-export async function getUserByUserId(userId: string) {
+export async function getUserByUserId(userId: string): Promise<UserEntity[]> {
   const result = await firebase
     .firestore()
     .collection('users')
@@ -65,7 +65,9 @@ export async function getUserFollowPhotos(
   return photosWithUserDetail
 }
 
-export const getSuggestedProfiles = async (userId: string) => {
+export const getSuggestedProfiles = async (
+  userId: string
+): Promise<UserEntity[]> => {
   const result = await firebase.firestore().collection('users').limit(10).get()
 
   const [{ following }] = await getUserByUserId(userId)
@@ -86,7 +88,7 @@ export const updateUserFollowing = async (
   docId: string,
   profileId: string,
   isFollowingProfile: boolean
-) => {
+): Promise<void> => {
   return firebase
     .firestore()
     .collection('users')
@@ -102,7 +104,7 @@ export const updateFollowedUserFollowers = async (
   docId: string,
   followingUserId: string,
   isFollowingProfile: boolean
-) => {
+): Promise<void> => {
   return firebase
     .firestore()
     .collection('users')
@@ -113,6 +115,23 @@ export const updateFollowedUserFollowers = async (
         : FieldValue.arrayUnion(followingUserId),
     })
 }
-export const getUserByUsername = async (username: string): Promise<boolean> => {
-  return false
+export const getUserByUsername = async (
+  username: string
+): Promise<boolean | UserEntity[]> => {
+  const result = await firebase
+    .firestore()
+    .collection('users')
+    .where('username', '==', username)
+    .get()
+
+  const user = result.docs.map((item) => {
+    const docId = item.id
+    const user = item.data()
+    return {
+      ...user,
+      docId,
+    } as UserEntity
+  })
+
+  return user.length > 0 ? user : false
 }

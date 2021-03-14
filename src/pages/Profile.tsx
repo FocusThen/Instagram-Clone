@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import * as ROUTES from '@app/constants/routes'
 
 import TheHeader from '@app/components/TheHeader/TheHeader'
-import ProfileDetail from '@app/components/ProfileDetail/ProfileDetail'
+import UserProfile from '@app/components/UserProfile/UserProfile'
 
 import { getUserByUsername } from '@app/services/firebase'
 
@@ -30,7 +30,7 @@ export default function Profile() {
     <div className="bg-gray-50">
       <TheHeader />
       <div className="mx-auto max-w-screen-lg">
-        <ProfileDetail username={username} />
+        <UserProfile username={username} />
       </div>
     </div>
   ) : null
