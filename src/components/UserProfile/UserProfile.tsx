@@ -41,6 +41,7 @@ export default function ProfileDetail({ username }: ProfileDetailProps) {
         profile={profile}
         followerCount={followerCount}
         setFollowerCount={dispatch}
+        username={username}
       />
       <UserProfilePhotos
         username={username}
