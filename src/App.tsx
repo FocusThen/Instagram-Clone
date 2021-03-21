@@ -3,7 +3,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import { UserContext } from '@app/context/user'
 import * as ROUTES from '@app/constants/routes'
-import { useAuthListener } from './hooks/useAuthListener'
+
+import { useAuthListener } from '@app/hooks/useAuthListener'
+
+import IsUserLoggedIn from '@app/components/Container/IsUserLoggedIn'
+import ProtectedRoute from '@app/components/Container/ProtectedRoute'
+
 const Dashboard = lazy(() => import('@app/pages/Dashboard'))
 const Login = lazy(() => import('@app/pages/Login'))
 const SignUp = lazy(() => import('@app/pages/SignUp'))
@@ -17,10 +22,24 @@ function App() {
       <Router>
         <Suspense fallback={<p>Loading...</p>}>
           <Switch>
-            <Route path={ROUTES.LOGIN} component={Login} />
-            <Route path={ROUTES.SIGN_UP} component={SignUp} />
+            <IsUserLoggedIn
+              user={user}
+              loggedInPath={ROUTES.DASHBOARD}
+              path={ROUTES.LOGIN}
+            >
+              <Login />
+            </IsUserLoggedIn>
+            <IsUserLoggedIn
+              user={user}
+              loggedInPath={ROUTES.DASHBOARD}
+              path={ROUTES.SIGN_UP}
+            >
+              <SignUp />
+            </IsUserLoggedIn>
             <Route path={ROUTES.PROFILE} component={Profile} />
-            <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
+            <ProtectedRoute user={user} path={ROUTES.DASHBOARD} exact>
+              <Dashboard />
+            </ProtectedRoute>
             <Route component={NotFound} />
           </Switch>
         </Suspense>
