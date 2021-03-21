@@ -1,15 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, memo } from 'react'
 import type { PhotosEntity } from '@appTypes/PhotosEntity'
 import Skeleton from 'react-loading-skeleton'
 import { UserContext } from '@app/context/user'
 import Post from '@app/components/Post/Post'
 
 export type UserProfilePhotosProps = {
-  photosCollection: PhotosEntity[]
+  photosCollection?: PhotosEntity[]
   username: string
 }
 
-export default function UserProfilePhotos({
+function UserProfilePhotos({
   photosCollection,
   username,
 }: UserProfilePhotosProps) {
@@ -30,7 +30,7 @@ export default function UserProfilePhotos({
               <Skeleton key={index} count={1} width={320} height={400} />
             ))}
           </>
-        ) : photosCollection.length > 0 ? (
+        ) : contents && contents.length > 0 ? (
           contents.map((content) => (
             <div className="relative group">
               <Post isHeaderVisible={false} content={content} />
@@ -44,3 +44,5 @@ export default function UserProfilePhotos({
     </div>
   )
 }
+
+export default memo(UserProfilePhotos)

@@ -19,8 +19,6 @@ export default function ProfileDetail({ username }: ProfileDetailProps) {
     dispatch,
   ] = useUserProfileReducer()
 
-  console.log(profile, photosCollection, followerCount)
-
   useEffect(() => {
     async function getProfileInfoAndPhotos() {
       const [user] = await getUserByUsername(username)
@@ -40,7 +38,7 @@ export default function ProfileDetail({ username }: ProfileDetailProps) {
         photosCollection={photosCollection}
         profile={profile}
         followerCount={followerCount}
-        setFollowerCount={dispatch}
+        dispatch={dispatch}
         username={username}
       />
       <UserProfilePhotos
