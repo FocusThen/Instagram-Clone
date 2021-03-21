@@ -84,11 +84,11 @@ export const getSuggestedProfiles = async (
     )
 }
 
-export const updateUserFollowing = async (
+export async function updateUserFollowing(
   docId: string,
   profileId: string,
   isFollowingProfile: boolean
-): Promise<void> => {
+): Promise<void> {
   return firebase
     .firestore()
     .collection('users')
@@ -100,24 +100,24 @@ export const updateUserFollowing = async (
     })
 }
 
-export const updateFollowedUserFollowers = async (
+export async function updateFollowedUserFollowers(
   docId: string,
   followingUserId: string,
   isFollowingProfile: boolean
-): Promise<void> => {
+): Promise<void> {
   return firebase
     .firestore()
     .collection('users')
     .doc(docId)
     .update({
-      following: isFollowingProfile
+      followers: isFollowingProfile
         ? FieldValue.arrayRemove(followingUserId)
         : FieldValue.arrayUnion(followingUserId),
     })
 }
-export const getUserByUsername = async (
+export async function getUserByUsername(
   username: string
-): Promise<UserEntity[]> => {
+): Promise<UserEntity[]> {
   const result = await firebase
     .firestore()
     .collection('users')
@@ -155,4 +155,19 @@ export async function getUserPhotosByUsername(username: string) {
   })
 
   return photos
+}
+
+export async function toggleFollow(
+  isFollowingProfile: boolean,
+  activeUserDocId: string,
+  profileDocId: string,
+  profileId: string,
+  followingUserId: string
+) {
+  await updateUserFollowing(activeUserDocId, profileId, isFollowingProfile)
+  await updateFollowedUserFollowers(
+    profileDocId,
+    followingUserId,
+    isFollowingProfile
+  )
 }
