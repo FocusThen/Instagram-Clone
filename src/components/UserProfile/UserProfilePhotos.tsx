@@ -32,7 +32,7 @@ function UserProfilePhotos({
           </>
         ) : contents && contents.length > 0 ? (
           contents.map((content) => (
-            <div className="relative group">
+            <div key={content.docId} className="relative group">
               <Post isHeaderVisible={false} content={content} />
             </div>
           ))
