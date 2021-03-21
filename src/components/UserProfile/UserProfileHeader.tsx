@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 
+import { toggleFollow } from '@app/services/firebase'
 import { useUser } from '@app/hooks/useUser'
 import ProfilePicture from '@app/components/ProfilePicture/ProfilePicture'
 import Button from '@app/components/Button/Button'
 
 import type { useUserProfileReducerEntity } from '@app/hooks/useUserProfileReducer'
+
 export type UserProfileHeaderProps = {
   username: string
   dispatch: React.Dispatch<useUserProfileReducerEntity>
@@ -31,7 +33,24 @@ export default function UserProfileHeader({
       photosCollection,
       followerCount: isFollowingProfile ? followerCount - 1 : followerCount + 1,
     })
+
+    if (user && profile)
+      await toggleFollow(
+        isFollowingProfile,
+        user.docId,
+        profile.docId,
+        profile.userId,
+        user.userId
+      )
   }
+
+  useEffect(() => {
+    if (profile && user) {
+      if (profile.followers.includes(user.userId)) {
+        setIsFollowingProfile(true)
+      }
+    }
+  }, [profile, user])
 
   return (
     <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
